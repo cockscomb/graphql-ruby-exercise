@@ -9,12 +9,12 @@ module Types
 
     field :author, UserType, null: false
     def owner
-      object.author
+      dataloader.with(Sources::ActiveRecordObject, ::User).load(object.author_id)
     end
 
     field :blog, BlogType, null: false
     def blog
-      object.blog
+      dataloader.with(Sources::ActiveRecordObject, ::Blog).load(object.blog_id)
     end
   end
 end
